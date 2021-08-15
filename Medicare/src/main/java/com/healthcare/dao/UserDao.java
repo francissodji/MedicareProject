@@ -30,7 +30,7 @@ public interface UserDao extends CrudRepository<User,Integer>{
 	@Modifying
 	@Query("UPDATE user u set password =:aUsername where u.username = :aPassword")
 	boolean changePassword(String aUsername, String aPassword);
-	*/
 	
+	*/
 
 }
