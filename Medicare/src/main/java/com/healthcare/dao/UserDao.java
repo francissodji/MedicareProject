@@ -14,14 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.healthcare.model.User;
 
-@Qualifier("UserDao")
-@Repository
+@Repository()
 public interface UserDao extends CrudRepository<User,Integer>{
 	
-	/*
-	@Query("from User where useruame=:aUsername")
-	User findByUsername(String aUsername);
 	
+	@Query(value="select * from user where username = ?1", nativeQuery= true)
+	User findByUsername(String ausername);
+	
+	
+	/*
 	@Query("from User u where u.stateconnect = true")
 	List<User> findAllConnectedUsers();
 	

@@ -33,4 +33,39 @@ public class UserService {
 		
 		return allUsers;
 	}
+	
+	public User loadUserByUserName(String theUserName)
+	{
+		User aUser = null;
+		
+		aUser = usersDao.findByUsername(theUserName);
+		
+		return aUser;
+	}
+	
+	
+	public User validateUserLogin(String theUserName, String theUserPw)
+	{
+		User itIsTheRealUser = null;
+		
+		User connectedUser = null;
+		
+		try
+		{
+			connectedUser = loadUserByUserName(theUserName);
+			
+			if (connectedUser != null)
+			{
+				if(connectedUser.getPassWord().equals(theUserPw))
+				{
+					itIsTheRealUser = connectedUser;
+				}
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+			
+		return itIsTheRealUser;
+	}
 }

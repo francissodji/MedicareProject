@@ -40,7 +40,7 @@ public class CartMedecin implements Serializable{
 	private int qttybuy;
 	
 	@Column(name = "stageitem", length = 1)
-	private char stageitem;
+	private char stageitem; //N = new, L = save for later, S = Sold
 
 	public CartMedecin() {}
 
