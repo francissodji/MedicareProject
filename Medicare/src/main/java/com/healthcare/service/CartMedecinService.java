@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.healthcare.dao.CartMedecinDao;
+import com.healthcare.model.Cart;
 import com.healthcare.model.CartMedecin;
 
 @Service
@@ -37,11 +38,28 @@ public class CartMedecinService {
 		List<CartMedecin> medecInCart = null;
 		
 		try {
-			medecInCart = cartMedecinDao.fintCartMedecinByStageAndUser(theStatus, theIdUser);
+			medecInCart = cartMedecinDao.findCartMedecinByStageAndUser(theStatus, theIdUser);
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		
 		return medecInCart;
 	}
+	
+	
+	//List of all Unsold item in User's cart
+	public List<CartMedecin> loadUnsoldItemInCartForAUser(Integer theIdUser)
+	{
+		List<CartMedecin> medecInCart = null;
+		
+		try {
+			medecInCart = cartMedecinDao.findUnsoldItemInCartforUser(theIdUser);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return medecInCart;
+	}
+	
+
 }

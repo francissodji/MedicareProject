@@ -1,6 +1,7 @@
 package com.healthcare.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,17 +40,21 @@ public class CartMedecin implements Serializable{
 	@Column(name = "quantity")
 	private int qttybuy;
 	
+	@Column(name = "datecartmed")
+	private Date datecartmed;
+	
 	@Column(name = "stageitem", length = 1)
 	private char stageitem; //N = new, L = save for later, S = Sold
 
 	public CartMedecin() {}
 
 
-	public CartMedecin(Medecin medecin, Cart cart, int qttybuy, char stageitem) {
+	public CartMedecin(Medecin medecin, Cart cart, int qttybuy, char stageitem, Date datecartmed) {
 		super();
 		this.medecin = medecin;
 		this.cart = cart;
 		this.qttybuy = qttybuy;
+		this.datecartmed = datecartmed;
 		this.stageitem = stageitem;
 	}
 
@@ -103,11 +108,22 @@ public class CartMedecin implements Serializable{
 		this.stageitem = stageitem;
 	}
 
+	
+
+	public Date getDatecartmed() {
+		return datecartmed;
+	}
+
+
+	public void setDatecartmed(Date datecartmed) {
+		this.datecartmed = datecartmed;
+	}
+
 
 	@Override
 	public String toString() {
 		return "CartMedecin [idcartmedecin=" + idcartmedecin + ", medecin=" + medecin + ", cart=" + cart + ", qttybuy="
-				+ qttybuy + ", stageitem=" + stageitem + "]";
+				+ qttybuy + ", datecartmed=" + datecartmed + ", stageitem=" + stageitem + "]";
 	}
 
 

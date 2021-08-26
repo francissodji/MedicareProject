@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.healthcare.dao.CartDao;
 import com.healthcare.model.Cart;
+import com.healthcare.model.Medecin;
 
 @Service
 public class CartService {
@@ -23,5 +24,23 @@ public class CartService {
 			ex.printStackTrace();
 		}
 		return userCart;
+	}
+	
+	
+	//
+	public boolean addCart(Cart cart)
+	{
+		boolean itSaved = false;
+		
+		try {
+			if(cartDao.save(cart) != null)
+			{
+				itSaved = true;
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return itSaved;
 	}
 }

@@ -37,16 +37,15 @@ public class MedecinService {
 	//list all medecin
 	public List<Medecin> loadAllMedecin()
 	{
-		List<Medecin> topthree = null;
+		List<Medecin> allmedecin = null;
 		try {
 			
-			topthree = (List<Medecin>)medecinDao.findTopThreeMedecin();
-			
+			allmedecin = (List<Medecin>)medecinDao.findAll();			
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		
-		return topthree;
+		return allmedecin;
 	}
 	
 	

@@ -19,14 +19,14 @@ import com.healthcare.model.Medecin;
 import com.healthcare.service.MedecinService;
 
 @RestController
-@RequestMapping("/medecin")
+@RequestMapping("/medecine")
 public class MedecinController {
 	
 	@Autowired
 	private MedecinService medecinService;
 	
-	
-	@GetMapping(path = "/allmedecin", produces = "application/json")
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping(path = "/allmedecine", produces = "application/json")
 	public List<Medecin> getAllMedecin () 
 	{
 
@@ -43,7 +43,7 @@ public class MedecinController {
 	
 	//Add new medecin
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping(path = "/addmedecin", consumes = "application/json", produces = "application/json")
+	@PostMapping(path = "/addmedecine", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> addUsers(@RequestBody Medecin medecin) {
 
 		Integer idMedec = medecinService.loadAllMedecin().size() + 1;
@@ -59,7 +59,7 @@ public class MedecinController {
 	
 	//list all medecin
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(path = "/allmedecin", produces = "application/json")
+	@GetMapping(path = "/topthreemedecine", produces = "application/json")
 	public List<Medecin> getTopThreeMedecin () 
 	{
 
@@ -76,7 +76,7 @@ public class MedecinController {
 	
 	//Load Medecin by Id
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(path = "/amedecin/{idmedecin}", produces = "application/json")
+	@GetMapping(path = "/amedecine/{idmedecin}", produces = "application/json")
 	public Optional<Medecin> getOneUsers (@PathVariable("idmedecin") Integer theidUser) 
 	{
 
