@@ -13,6 +13,9 @@ public class CryptPassword {
 		
 		String sha3Hex = "";
 		
+		if (passwordPlainTex == null)
+			passwordPlainTex = "@Medicare123";
+			
 		//*****************************
 		MessageDigest digest;
 		try {

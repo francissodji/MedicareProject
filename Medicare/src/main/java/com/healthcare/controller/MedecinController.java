@@ -19,7 +19,7 @@ import com.healthcare.model.Medecin;
 import com.healthcare.service.MedecinService;
 
 @RestController
-@RequestMapping("/medecine")
+@RequestMapping("/api/medecine")
 public class MedecinController {
 	
 	@Autowired
@@ -41,16 +41,16 @@ public class MedecinController {
 		return allMedec;
 	}
 	
-	//Add new medecin
+	//Add new medecine
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(path = "/addmedecine", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> addUsers(@RequestBody Medecin medecin) {
 
-		Integer idMedec = medecinService.loadAllMedecin().size() + 1;
+		//Integer idMedec = medecinService.loadAllMedecin().size() + 1;
 
-		medecin.setIdmedecin(idMedec);
+		//medecin.setIdmedecin(idMedec);
 		medecinService.addNewMedecin(medecin);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(medecin.getIdmedecin())
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idmedecin}").buildAndExpand(medecin.getIdmedecin())
 				.toUri();
 
 		return ResponseEntity.created(location).build();

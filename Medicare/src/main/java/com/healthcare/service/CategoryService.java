@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.healthcare.dao.CategoryDao;
 import com.healthcare.model.Category;
+import com.healthcare.model.Medecin;
 
 
 @Service
@@ -31,6 +32,24 @@ public class CategoryService {
 		return topthree;
 	}
 	
+	//Add Category
+	//add new medecin
+		public boolean addNewCategory(Category category)
+		{
+			boolean itSaved = false;
+			
+			try {
+				if(categoryDao.save(category) != null)
+				{
+					itSaved = true;
+				}
+			}catch(Exception ex) {
+				ex.printStackTrace();
+			}
+			
+			return itSaved;
+		}
+		
 	
 	//all category
 	public List<Category> loadAllCategories()

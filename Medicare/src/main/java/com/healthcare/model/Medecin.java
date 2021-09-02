@@ -44,13 +44,15 @@ public class Medecin {
 	@Column(name = "picture", nullable = true, length = 300)
 	private String picture;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	//@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name="idcategory", foreignKey=@ForeignKey(name="fk_MedecinCategory"))
 	private Category category;
 
 
 	@OneToMany(mappedBy = "medecin", cascade = CascadeType.ALL)
-	private List<CartMedecin> cartForMedecin = new ArrayList<>();
+	private List<CartMedecin> cartForMedecin;
+	//private List<CartMedecin> cartForMedecin = new ArrayList<>();
 	
 	
 	public Medecin() {}

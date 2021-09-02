@@ -19,7 +19,7 @@ import com.healthcare.model.User;
 import com.healthcare.service.CartMedecinService;
 
 @RestController
-@RequestMapping("/medecinincart")
+@RequestMapping("/api/medecinincart")
 public class CartMedecineController {
 	
 	@Autowired

@@ -13,4 +13,8 @@ public interface MedecinDao extends CrudRepository<Medecin, Integer>{
 
 	@Query(value="select * from medecin LIMIT 3", nativeQuery= true)
 	List<Medecin> findTopThreeMedecin();
+	
+	@Query(value="select idmedecin, brand, description, designmedecin, picture, qttyavail, "
+			+ "stateactivate, unitprice, idcategory from medecin", nativeQuery= true)
+	List<Medecin> findAllTheMedecine();
 }

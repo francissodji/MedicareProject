@@ -18,7 +18,7 @@ import com.healthcare.model.User;
 import com.healthcare.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
 
 	@Autowired
@@ -44,9 +44,9 @@ public class UserController {
 	@PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> registerUser(@RequestBody User theUser) {
 
-		//Integer idUser = userService.loadAllUsers().size() + 1;
+		Integer idUser = userService.loadAllUsers().size() + 1;
 
-		//theUser.setIdUser(idUser);
+		theUser.setIdUser(idUser);
 		userService.addUsers(theUser);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(theUser.getIdUser())
 				.toUri();
@@ -57,36 +57,46 @@ public class UserController {
 	
 	//Register user
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(path = "/login/{username}/{password}")
-	public User validateUser (@PathVariable("username") String theUsername, @PathVariable("password") String thePassword)
+	@PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
+	public User validateUser(@RequestBody User theUser) throws Exception
 	{
 		User aValideUser = null;
+		String tempUsername = theUser.getUserName();
+		String tempPassWord = theUser.getPassWord();
+		
+
+			if(tempUsername != null && tempPassWord != null)
+			{
+				
+				aValideUser = userService.validateUserLogin(tempUsername,tempPassWord);
+				
+				System.out.println("In Controler ==> "+aValideUser.toString());
+			}
+			
+			if(aValideUser == null)
+			{
+				throw new Exception("In controller ==> Bad credential");
+			}
+			
+			
+		return aValideUser;
+	}
+	
+	//Register user
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping(path = "/lastuser")
+	public User getLastUser ()
+	{
+		User theLastuser = null;
 		
 		try {
-			aValideUser = userService.validateUserLogin(theUsername,thePassword);
+			theLastuser = userService.loadUserLastUser();
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
 		
-		return aValideUser;
+		return theLastuser;
 	}
-
-
-	/*
-	//@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(path = "/latestuser", produces = "application/json")
-	public User getLatestAddedUser () 
-	{
-
-		User aUser = null;
-		
-		//aUser = userService.loadTheLatestAddedUser();
-		
-		return aUser;
-	}
-	
-	*/
-	
 	
 	
 }

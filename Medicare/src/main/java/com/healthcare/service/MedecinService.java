@@ -40,7 +40,7 @@ public class MedecinService {
 		List<Medecin> allmedecin = null;
 		try {
 			
-			allmedecin = (List<Medecin>)medecinDao.findAll();			
+			allmedecin = (List<Medecin>)medecinDao.findAllTheMedecine();			
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}

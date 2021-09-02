@@ -11,7 +11,7 @@ import com.healthcare.model.Profil;
 import com.healthcare.service.ProfilService;
 
 @RestController
-@RequestMapping("/profil")
+@RequestMapping("/api/profil")
 public class ProfilController {
 
 	@Autowired

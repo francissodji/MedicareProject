@@ -10,19 +10,19 @@ import com.healthcare.general.CryptPassword;
 import com.healthcare.model.User;
 
 @Service
-public class UserService {
+public class UserAdminService {
 
 	@Autowired
 	private UserDao usersDao;
 	
 	//register
-	public boolean addUsers(User user)
+	public boolean addAdminUsers(User user)
 	{
 		boolean isadd = false;
 		CryptPassword passwordCrypter = new CryptPassword();
 		
 		String aCryptedPw = passwordCrypter.CryptPasswordSHA3256(user.getPassWord());
-		
+	
 		user.setPassWord(aCryptedPw);
 		
 		if(usersDao.save(user) != null)
@@ -46,49 +46,18 @@ public class UserService {
 	
 	
 	//load by username
-	public User loadUserByUserNameAndPassword(String theUserName, String thePassword)
+	public User loadAdminUserByUsernsameAndPassword(String theUserName, String thePassword)
 	{
 		User aUser = null;
 		
 		if(theUserName != null && thePassword != null) {
-			aUser = usersDao.findByUsernameAndPassword(theUserName,thePassword);
+			aUser = usersDao.findByAdminByUsernameAndPassword(theUserName,thePassword);
 		}
 		
 		return aUser;
 	}
 	
-	public User loadUserLastUser()
-	{
-		User aUser = null;
-		
-		aUser = usersDao.findLastUser();
-		
-		return aUser;
-	}
 	
-	
-	//validate user login
-	public User validateUserLogin(String theUserName, String theUserPw) throws Exception
-	{
-
-		User connectedUser = null;
-		
-		CryptPassword passwordCrypter = new CryptPassword();
-		
-		String aCryptedPw = passwordCrypter.CryptPasswordSHA3256(theUserPw); //crypt the entered password
-		
-		try
-		{
-			connectedUser = loadUserByUserNameAndPassword(theUserName,aCryptedPw);
-			
-			
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
-		
-			
-		return connectedUser;
-	}
 	
 	//validate user login
 	public User validateAdminUserLogin(String theUserName, String theUserPw) throws Exception
@@ -102,7 +71,7 @@ public class UserService {
 		
 		try
 		{
-			connectedUser = loadUserByUserNameAndPassword(theUserName,aCryptedPw);
+			connectedUser = loadAdminUserByUsernsameAndPassword(theUserName,aCryptedPw);
 			
 			
 		}catch(Exception ex) {
@@ -112,4 +81,6 @@ public class UserService {
 			
 		return connectedUser;
 	}
+	
+
 }
