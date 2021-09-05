@@ -17,4 +17,12 @@ public interface MedecinDao extends CrudRepository<Medecin, Integer>{
 	@Query(value="select idmedecin, brand, description, designmedecin, picture, qttyavail, "
 			+ "stateactivate, unitprice, idcategory from medecin", nativeQuery= true)
 	List<Medecin> findAllTheMedecine();
+	
+	//search
+	@Query(value="Select * from Medecin where designmedecin like '%?1%'", nativeQuery= true)
+	List<Medecin> findAllMedecineFromSearch(String searchstring);
+	
+	//Find idexist in cart
+	@Query(value="select * from medecin where idmedecin in (select distinct idmedecin from cartmedecin) and idmedecin = ?1",nativeQuery= true)
+	Medecin findMedecinExistInCart(Integer theIdmedecin);
 }

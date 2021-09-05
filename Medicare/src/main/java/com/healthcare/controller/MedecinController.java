@@ -41,6 +41,26 @@ public class MedecinController {
 		return allMedec;
 	}
 	
+	
+	/*
+	//search
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping(path = "/allmedecinesearch/{designmedecin}", produces = "application/json")
+	public List<Medecin> getAllMedecinFromSearch (@PathVariable("designmedecin") String thedesignation) 
+	{
+
+		List<Medecin> allMedec = null;
+		
+		try {
+			allMedec = medecinService.loadAllMedecinFromSearch(thedesignation);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return allMedec;
+	}
+	*/
+	
 	//Add new medecine
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(path = "/addmedecine", consumes = "application/json", produces = "application/json")
@@ -80,13 +100,35 @@ public class MedecinController {
 	public Optional<Medecin> getOneUsers (@PathVariable("idmedecin") Integer theidUser) 
 	{
 
-		Optional<Medecin> aUsers = null;
+		Optional<Medecin> aMedec = null;
 		try {
-			aUsers = medecinService.loadMedecinById(theidUser);
+			aMedec = medecinService.loadMedecinById(theidUser);
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return aUsers;
+		return aMedec;
+
+	}
+	
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping(path = "/ismedecineexist/{idmedecin}", produces = "application/json")
+	public boolean IsMedecineIncart (@PathVariable("idmedecin") Integer theidUser) 
+	{
+		boolean itExist = false;
+		
+		Medecin aMedecin = null;
+		try {
+			aMedecin = medecinService.loadMedecinExistInCart(theidUser);
+			if(aMedecin != null)
+			{
+				itExist = true;
+			}
+				
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return itExist;
 
 	}
 	

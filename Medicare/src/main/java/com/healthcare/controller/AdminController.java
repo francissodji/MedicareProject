@@ -23,7 +23,7 @@ public class AdminController {
 	@Autowired
 	private UserAdminService userAdminService;
 	
-	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(path = "/allusers", produces = "application/json")
 	public List<User> getAllUsers () 
 	{

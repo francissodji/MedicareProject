@@ -61,5 +61,19 @@ public class CartMedecinService {
 		return medecInCart;
 	}
 	
+	
+	public boolean updateQuantityInCart(Integer theIdUser, Integer theIdMedecin, Integer theNewQtty)
+	{
+		boolean isUpdate = false;
+		
+		try {
+			isUpdate = cartMedecinDao.UpdateQuantityInCart(theIdUser, theIdMedecin, theNewQtty);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return isUpdate;
+	}
+	
 
 }

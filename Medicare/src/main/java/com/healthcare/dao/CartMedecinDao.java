@@ -19,11 +19,13 @@ public interface CartMedecinDao extends CrudRepository<CartMedecin, Integer>{
 			+ " and t.idcart = (select idcart from cart where usercart = ?1)", nativeQuery= true)
 	*/
 	
-	@Query(value="Select distinct c.*  from cartMedecin c inner JOIN cart t on c.idcart = t.idcart \r\n"
-	+ "where stageitem = 'N' and t.idcart = (select idcart from cart where usercart = ?7)",nativeQuery= true)
+	@Query(value="Select distinct c.*  from cartMedecin c, cart t where c.idcart = t.idcart and stageitem = 'N' and t.idcart = (select idcart from cart where usercart = ?1)",nativeQuery= true)
 	List<CartMedecin> findUnsoldItemInCartforUser( Integer idUser);
 	
 	
+	@Query(value="update cartmedecin set quantity = ?3 where idmedecin = ?2 and idcart = (select idcart from cart where usercart = ?1)", nativeQuery= true)
+	boolean UpdateQuantityInCart(Integer idUser, Integer idmedecin, Integer newqtity);
 	
+	;
 }
 

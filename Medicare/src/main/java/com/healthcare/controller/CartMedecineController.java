@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,7 @@ import com.healthcare.model.User;
 import com.healthcare.service.CartMedecinService;
 
 @RestController
-@RequestMapping("/api/medecinincart")
+@RequestMapping("/api/medecineincart")
 public class CartMedecineController {
 	
 	@Autowired
@@ -41,6 +42,7 @@ public class CartMedecineController {
 		return allItemInUserCart;
 	}
 	
+	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(path = "/addtocart", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<Object> addUsers(@RequestBody CartMedecin medecineToCart) {
 
@@ -50,6 +52,23 @@ public class CartMedecineController {
 				.toUri();
 
 		return ResponseEntity.created(location).build();
+
+	}
+	
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PutMapping(path = "/addtocart", consumes = "application/json", produces = "application/json")
+	public boolean UpdateQuantity(@PathVariable("iduser") Integer theIdUser, @PathVariable("idmedecin") Integer theIdMedecin, @PathVariable("quantity") Integer theQtity) {
+
+		boolean isUpdated = false;
+		try {
+			isUpdated = cartMedecinService.updateQuantityInCart(theIdMedecin, theIdMedecin, theQtity);
+			
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return isUpdated;
 
 	}
 

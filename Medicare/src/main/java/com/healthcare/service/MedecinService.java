@@ -48,6 +48,20 @@ public class MedecinService {
 		return allmedecin;
 	}
 	
+	//list all medecin from search
+	public List<Medecin> loadAllMedecinFromSearch(String seachElement)
+	{
+		List<Medecin> allmedecin = null;
+		try {
+			
+			allmedecin = (List<Medecin>)medecinDao.findAllMedecineFromSearch(seachElement);		
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return allmedecin;
+	}
+	
 	
 	//add new medecin
 	public boolean addNewMedecin(Medecin medecin)
@@ -65,6 +79,23 @@ public class MedecinService {
 		
 		return itSaved;
 	}
+	
+	
+	
+	//Find medicine exist in cart
+	public Medecin loadMedecinExistInCart(Integer theIdMedecin)
+	{
+		Medecin aMedecin = null;
+		try {
+			
+			aMedecin = (Medecin)medecinDao.findMedecinExistInCart(theIdMedecin);		
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return aMedecin;
+	}
+	
 	
 	
 	//find medecin by Id

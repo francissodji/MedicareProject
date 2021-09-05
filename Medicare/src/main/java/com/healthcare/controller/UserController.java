@@ -84,7 +84,7 @@ public class UserController {
 	
 	//Register user
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping(path = "/lastuser")
+	@GetMapping(path = "/lastuser", produces = "application/json")
 	public User getLastUser ()
 	{
 		User theLastuser = null;
